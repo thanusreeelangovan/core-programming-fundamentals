@@ -73,6 +73,3 @@ Highest Spending Category: Books
 - Visualize expenses using charts
 
 ---
-
-^X
-
