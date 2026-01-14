@@ -16,15 +16,6 @@ It validates length, uppercase, lowercase, digits, and special characters.
 
 ---
 
-## Folder Structure
-# Password Strength Checker (Python)
-
-## Description
-This is a Python program that checks the strength of a password and provides feedback to improve it.  
-It validates length, uppercase, lowercase, digits, and special characters.
-
----
-
 ## Features
 - Validates password length (minimum 8 characters)
 - Checks for uppercase and lowercase letters
