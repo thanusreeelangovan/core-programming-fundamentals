@@ -1,12 +1,16 @@
 import csv
+import os
 
-def read_data(filename):
+def read_data():
     students = []
-    filename = r"C:/Users/admin/core-programming-fundamentals/python/data.csv"
-    with open(filename, newline='') as file:
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    filename = os.path.join(script_dir, "data.csv")
+
+    with open(filename, newline="") as file:
         reader = csv.DictReader(file)
         for row in reader:
-            students.append(row)
+            if row and row["USN"]:
+                students.append(row)
     return students
 
 def analyze_results(students):
@@ -16,22 +20,16 @@ def analyze_results(students):
     topper = None
     highest_total = 0
 
-    for s in students:
-        marks = [
-            int(s["Physics"]),
-            int(s["Maths"]),
-            int(s["Electronics"]),
-            int(s["CommunicationSkills"]),
-            int(s["IDT"]),
-            int(s["Kannada"]),
-            int(s["CyberSecurity"])
-        ]
+    # Automatically detect subjects
+    subjects = [col for col in students[0] if col not in ("USN", "Name")]
 
+    for s in students:
+        marks = [int(s[sub]) for sub in subjects]
         total = sum(marks)
-        average = total / len(marks)
+        average = total / len(subjects)
 
         s["Total"] = total
-        s["Average"] = average
+        s["Average"] = round(average, 2)
 
         if average >= 40:
             pass_count += 1
@@ -42,13 +40,11 @@ def analyze_results(students):
             highest_total = total
             topper = s
 
-    return total_students, pass_count, fail_count, topper
+    return total_students, pass_count, fail_count, topper, subjects
 
 def main():
-    filename = "data.csv"
-    students = read_data(filename)
-
-    total, passed, failed, topper = analyze_results(students)
+    students = read_data()
+    total, passed, failed, topper, subjects = analyze_results(students)
 
     print("Total Students:", total)
     print("Passed:", passed)
@@ -59,6 +55,11 @@ def main():
     print("USN:", topper["USN"])
     print("Total Marks:", topper["Total"])
     print("Average:", topper["Average"])
+    print()
+    print("Subject-wise marks:")
+    for sub in subjects:
+        print(sub + ":", topper[sub])
 
 if __name__ == "__main__":
     main()
+
