@@ -16,16 +16,6 @@ It validates length, uppercase, lowercase, digits, and special characters.
 
 ---
 
-## Features
-- Validates password length (minimum 8 characters)
-- Checks for uppercase and lowercase letters
-- Checks for digits
-- Checks for special characters
-- Provides suggestions to improve weak passwords
-- Classifies passwords as Weak, Moderate, or Very Strong
-
----
-
 ## Folder Structure
 password_strength_checker/
 ├── password_checker.py
@@ -53,3 +43,4 @@ Add at least one special character (!@#$%^&* etc.)
 - Conditional logic
 - Functions and modular programming
 - User input handling
+
